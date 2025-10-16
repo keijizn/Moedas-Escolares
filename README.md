@@ -1,4 +1,4 @@
-# Sistema-de-Aluguel-de-Carros
+# Sistema-de-Moedas
 
 ## Diagrama de Classes:
 <img width="717" height="635" alt="image" src="https://github.com/user-attachments/assets/48cced77-b165-41d7-bae9-40ff5fbbc50b" />
