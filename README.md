@@ -26,5 +26,9 @@
 ## Diagrama de Casos de Uso:
 <img width="720" height="465" alt="image" src="https://github.com/user-attachments/assets/72bd302d-18b7-48ae-935b-d8183d82ceb9" />
 
+## Modelo ER do Banco de Dados:
+<img width="772" height="720" alt="ER do Sistema de Moedas drawio" src="https://github.com/user-attachments/assets/41950aa0-2b7c-4d84-92b5-70b5bf59b36e" />
+
+
 
 
