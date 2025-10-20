@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <title>Alunos — CRUD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./home.css">
+  <style>
+    .table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .table th, .table td { padding: 10px; border-bottom: 1px solid #2a2f3a; }
+    .row-actions { display: flex; gap: 8px; }
+    .inline { display: flex; gap: 8px; flex-wrap: wrap; }
+    .inline input { min-width: 160px; }
+    .topbar a { color: #b7c0ff; text-decoration: none; margin-left: 12px; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Moeda <span>Estudantil</span></div>
+    <div>
+      <a href="./home.html">Home</a>
+      <a href="./empresas.html">Empresas</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h1>Alunos</h1>
+
+    <section class="card">
+      <h3>Novo aluno (rápido)</h3>
+      <div class="inline">
+        <input id="n-nome" placeholder="Nome">
+        <input id="n-email" placeholder="Email">
+        <input id="n-cpf" placeholder="CPF">
+        <input id="n-curso" placeholder="Curso">
+        <button class="btn primary" id="btnAdd">Adicionar</button>
+        <small class="muted" id="msgAdd"></small>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Lista</h3>
+      <table class="table" id="tb">
+        <thead>
+          <tr><th>Nome</th><th>Email</th><th>CPF</th><th>Curso</th><th>Ações</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <small class="muted" id="status"></small>
+    </section>
+  </main>
+
+  <script src="./alunos.js"></script>
+</body>
+</html>
