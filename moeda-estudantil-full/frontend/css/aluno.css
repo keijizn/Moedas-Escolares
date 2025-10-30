@@ -1,0 +1,9 @@
+@import url('login.css');
+header{display:flex;justify-content:space-between;align-items:center;max-width:1024px;margin:20px auto 0}
+header h1{margin:0}
+header button{padding:8px 12px;border-radius:10px;border:1px solid #ddd;background:#fff;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:1024px;margin:16px auto}
+.card ul{margin:0;padding-left:18px}
+.saldo{font-size:28px;font-weight:700}
+.danger{background:#ef4444;color:#fff}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}

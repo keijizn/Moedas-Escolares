@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-br"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Empresa • Moeda Estudantil</title>
+<link rel="stylesheet" href="css/empresa.css">
+</head><body>
+<header><h1>Empresa Parceira</h1><button id="sair">Sair</button></header>
+<main class="grid">
+  <section class="card">
+    <h2>Cadastrar novo benefício</h2>
+    <div class="field"><label>Título</label><input id="titulo"></div>
+    <div class="field"><label>Descrição</label><input id="descricao"></div>
+    <div class="field"><label>Custo (moedas)</label><input id="custo" type="number" min="1"></div>
+    <button id="criar">Criar benefício</button>
+  </section>
+  <section class="card">
+    <h2>Seus benefícios</h2>
+    <ul id="lista-beneficios"></ul>
+  </section>
+  <section class="card">
+    <h2>Distribuir Moedas (para Professor)</h2>
+    <div class="field"><label>ID do Professor</label><input id="professorId" type="number" min="1"></div>
+    <div class="field"><label>Quantidade</label><input id="amount" type="number" min="1"></div>
+    <div class="field"><label>Motivo</label><input id="reason"></div>
+    <button id="enviar">Enviar moedas</button>
+  </section>
+  <section class="card">
+    <h2>Saldo</h2>
+    <div id="saldo" class="saldo">—</div>
+    <h3>Histórico</h3>
+    <ul id="hist"></ul>
+  </section>
+</main>
+<script src="js/config.js"></script>
+<script src="js/empresa.js"></script>
+</body></html>
