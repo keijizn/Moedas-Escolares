@@ -1,9 +1,0 @@
-com\example\moeda\DevData.class
-com\example\moeda\repo\AlunoRepository.class
-com\example\moeda\domain\EmpresaParceira.class
-com\example\moeda\repo\EmpresaParceiraRepository.class
-com\example\moeda\api\EmpresaParceiraController.class
-com\example\moeda\api\AuthController.class
-com\example\moeda\domain\Aluno.class
-com\example\moeda\MoedaApplication.class
-com\example\moeda\api\AlunoController.class
