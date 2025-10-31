@@ -13,27 +13,31 @@
   </header>
 
   <main class="grid">
+    <!-- Formulário de envio de moedas -->
     <section class="card">
       <h2>Distribuir Moedas (para Aluno)</h2>
 
-      <div class="field">
-        <label for="alunoId">ID do Aluno</label>
-        <input id="alunoId" type="number" min="1" inputmode="numeric" required>
-      </div>
+      <form id="form-envio" autocomplete="off" novalidate>
+        <div class="field">
+          <label for="alunoId">ID do Aluno</label>
+          <input id="alunoId" type="number" min="1" inputmode="numeric" required>
+        </div>
 
-      <div class="field">
-        <label for="quantidade">Quantidade</label>
-        <input id="quantidade" type="number" min="1" step="1" inputmode="numeric" required>
-      </div>
+        <div class="field">
+          <label for="quantidade">Quantidade</label>
+          <input id="quantidade" type="number" min="1" step="1" inputmode="numeric" required>
+        </div>
 
-      <div class="field">
-        <label for="motivo">Motivo</label>
-        <input id="motivo" type="text" placeholder="ex.: desempenho, participação...">
-      </div>
+        <div class="field">
+          <label for="motivo">Motivo</label>
+          <input id="motivo" type="text" placeholder="ex.: desempenho, participação...">
+        </div>
 
-      <button id="enviar" type="button">Enviar moedas</button>
+        <button id="enviar" type="submit">Enviar moedas</button>
+      </form>
     </section>
 
+    <!-- Saldo e histórico -->
     <section class="card">
       <h2>Saldo</h2>
       <div id="saldo" class="saldo">—</div>

@@ -10,14 +10,13 @@ const professorId = Number(user.id);
 // helper de DOM
 const $ = (id) => document.getElementById(id);
 
-// --- helper de fetch com fallback /professores -> /professor ---
+// (opcional) fallback /professores -> /professor
 function toSingular(path) {
   return path.replace('/professores/', '/professor/');
 }
 async function apiFetch(path, options = {}) {
-  const urlPlural = `${API_BASE_URL}${path}`;
-  console.log('↗️  fetch', urlPlural);
-  let r = await fetch(urlPlural, options);
+  const url = `${API_BASE_URL}${path}`;
+  let r = await fetch(url, options);
 
   if (r.status === 404 && path.startsWith('/professores/')) {
     const urlSing = `${API_BASE_URL}${toSingular(path)}`;
@@ -26,36 +25,41 @@ async function apiFetch(path, options = {}) {
   }
   return r;
 }
-// ----------------------------------------------------------------
 
 async function enviar() {
   try {
-    const alunoId = parseInt($('alunoId')?.value || '0', 10);
-    const quantidade = parseInt($('quantidade')?.value || '0', 10);
-    const motivo = $('motivo')?.value?.trim() || '';
+    const alunoId    = Number($('alunoId')?.value || 0);
+    const quantidade = Number($('quantidade')?.value || 0);
+    const motivo     = $('motivo')?.value?.trim() || '';
 
-    if (!alunoId || !quantidade) {
-      alert('Informe o ID do aluno e a quantidade.');
+    if (!alunoId || !quantidade || quantidade <= 0) {
+      alert('Informe o ID do aluno e uma quantidade > 0.');
       return;
     }
 
     const res = await apiFetch(`/professores/${professorId}/grant`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ alunoId, quantidade, motivo })
+      // >>> os nomes que o backend espera <<<
+      body: JSON.stringify({ alunoId, amount: quantidade, reason: motivo })
     });
 
     if (!res.ok) {
       const txt = await res.text().catch(() => '');
-      throw new Error(`Falha ao enviar (${res.status}): ${txt}`);
+      console.error('Grant falhou:', res.status, txt);
+      alert(`Falha ao enviar (${res.status}): ${txt}`);
+      return;
     }
 
     alert('Moedas enviadas!');
+    // opcional: limpar campos
+    // $('quantidade').value = '';
+    // $('motivo').value = '';
     await loadSaldo();
     await loadHist();
   } catch (e) {
-    console.error(e);
-    alert(e.message || 'Erro ao enviar moedas');
+    console.error('Erro no fetch/grant:', e);
+    alert(e?.message || 'Erro ao enviar moedas');
   }
 }
 
@@ -72,9 +76,11 @@ async function loadHist() {
   const items = await r.json();
   const ul = $('hist');
   ul.innerHTML = '';
-  items.forEach(i => {
+
+  (Array.isArray(items) ? items : []).forEach(i => {
     const li = document.createElement('li');
-    li.textContent = `${i.ts} • ${i.kind} • ${i.amount} • ${i.descricao || ''}`;
+    // reason (não descricao)
+    li.textContent = `${i.ts} • ${i.kind} • ${i.amount} • ${i.reason || ''}`;
     ul.appendChild(li);
   });
 }
@@ -85,6 +91,5 @@ $('sair').onclick = () => {
   location.href = 'login.html';
 };
 
-// carrega ao entrar
 loadSaldo().catch(console.warn);
 loadHist().catch(console.warn);

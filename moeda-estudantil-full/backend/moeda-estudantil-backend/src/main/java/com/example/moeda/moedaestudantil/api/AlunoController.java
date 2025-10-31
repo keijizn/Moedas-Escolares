@@ -34,30 +34,31 @@ public class AlunoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> get(@PathVariable Long id) {
+    public ResponseEntity<?> get(@PathVariable("id") Long id) {
         return ResponseEntity.ok(alunoService.get(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Map<String, String> body) {
+    public ResponseEntity<?> update(@PathVariable("id") Long id,
+                                    @RequestBody Map<String, String> body) {
         var a = alunoService.update(id, body.get("nome"), body.get("curso"), body.get("email"));
         return ResponseEntity.ok(a);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
         alunoService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/wallet")
-    public ResponseEntity<?> saldo(@PathVariable Long id) {
+    public ResponseEntity<?> saldo(@PathVariable("id") Long id) {
         var w = walletService.getOrCreate(UserType.ALUNO, id);
         return ResponseEntity.ok(Map.of("saldo", w.getSaldo()));
     }
 
     @GetMapping("/{id}/ledger")
-    public ResponseEntity<?> ledger(@PathVariable Long id) {
+    public ResponseEntity<?> ledger(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
                 ledgerRepo.findByFromTypeAndFromIdOrToTypeAndToIdOrderByTsDesc(
                         UserType.ALUNO, id, UserType.ALUNO, id
@@ -66,7 +67,8 @@ public class AlunoController {
     }
 
     @PostMapping("/{id}/redeem/{benefitId}")
-    public ResponseEntity<?> redeem(@PathVariable Long id, @PathVariable Long benefitId) {
+    public ResponseEntity<?> redeem(@PathVariable("id") Long id,
+                                    @PathVariable("benefitId") Long benefitId) {
         var b = benefitService.listAllActive().stream()
                 .filter(x -> x.getId().equals(benefitId))
                 .findFirst()

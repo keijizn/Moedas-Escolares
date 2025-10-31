@@ -12,11 +12,8 @@
   <properties>
     <java.version>17</java.version>
     <spring-boot.version>3.3.4</spring-boot.version>
-    <!-- evita warning de encoding e garante UTF-8 -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-    <!-- força o compilador do Maven a usar Java 17 -->
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <maven.compiler.release>${java.version}</maven.compiler.release>
@@ -35,6 +32,7 @@
   </dependencyManagement>
 
   <dependencies>
+    <!-- Spring -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
@@ -51,11 +49,21 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
+
+    <!-- Mail (PRECISA estar dentro de <dependencies>) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-mail</artifactId>
+    </dependency>
+
+    <!-- DB -->
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <scope>runtime</scope>
     </dependency>
+
+    <!-- Util -->
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-crypto</artifactId>
@@ -65,6 +73,8 @@
       <artifactId>lombok</artifactId>
       <optional>true</optional>
     </dependency>
+
+    <!-- Swagger/OpenAPI -->
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -73,23 +83,23 @@
   </dependencies>
 
   <build>
-  <plugins>
-    <!-- compila com Java 17 -->
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-compiler-plugin</artifactId>
-      <version>3.11.0</version>
-      <configuration>
-        <release>${java.version}</release>
-      </configuration>
-    </plugin>
+    <plugins>
+      <!-- Compila com Java 17 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <release>${java.version}</release>
+        </configuration>
+      </plugin>
 
-    <!-- FIX: plugin do Spring Boot alinhado com 3.3.4 -->
-    <plugin>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-maven-plugin</artifactId>
-      <version>3.3.4</version>
-    </plugin>
-  </plugins>
-</build>
+      <!-- Plugin do Spring Boot 3.3.4 -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring-boot.version}</version>
+      </plugin>
+    </plugins>
+  </build>
 </project>

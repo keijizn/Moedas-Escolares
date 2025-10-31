@@ -1,6 +1,10 @@
 package com.example.moeda.moedaestudantil.config;
-import org.springframework.boot.CommandLineRunner; import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration;
-import com.example.moeda.moedaestudantil.domain.*; import com.example.moeda.moedaestudantil.repo.*; import com.example.moeda.moedaestudantil.service.*;
+import org.springframework.boot.CommandLineRunner; 
+import org.springframework.context.annotation.Bean; 
+import org.springframework.context.annotation.Configuration;
+import com.example.moeda.moedaestudantil.domain.*; 
+import com.example.moeda.moedaestudantil.repo.*; 
+import com.example.moeda.moedaestudantil.service.*;
 import java.math.BigDecimal;
 @Configuration
 public class DataLoader {
