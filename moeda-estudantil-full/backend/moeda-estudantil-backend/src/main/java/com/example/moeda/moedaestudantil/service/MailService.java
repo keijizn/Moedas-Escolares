@@ -16,11 +16,6 @@ public class MailService {
 
     @Value("${app.mail.from:no-reply@moedasescolares.com}")
     private String from;
-
-    /**
-     * Envia e-mail HTML de forma assíncrona (não bloqueia a thread do request).
-     * Caso haja falha, apenas registra; não quebra o fluxo de cadastro.
-     */
     @Async
     public void sendHtml(String to, String subject, String html) {
         try {
@@ -32,12 +27,10 @@ public class MailService {
             helper.setText(html, true);
             mailSender.send(msg);
         } catch (Exception e) {
-            // Log simples; se preferir, troque por um logger
             e.printStackTrace();
         }
     }
 
-    /** Versão texto puro (útil para testes/alternativa). */
     @Async
     public void sendText(String to, String subject, String text) {
         sendHtml(to, subject, "<pre style=\"font-family:monospace\">" + escape(text) + "</pre>");
