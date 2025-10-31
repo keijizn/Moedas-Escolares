@@ -18,20 +18,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())         // sem CSRF para API REST
-            .cors(Customizer.withDefaults())      // usa o bean corsConfigurationSource
+            .csrf(csrf -> csrf.disable())         
+            .cors(Customizer.withDefaults())     
             .authorizeHttpRequests(auth -> auth
-                // Swagger aberto
                 .requestMatchers(
                     "/v3/api-docs/**",
                     "/swagger-ui/**",
                     "/swagger-ui.html"
                 ).permitAll()
-                // Auth & público
                 .requestMatchers("/api/auth/**").permitAll()
-                // OPTIONS (pré-flight) liberado
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                // o resto pode exigir auth simples; se quiser tudo livre enquanto testa, troque por .anyRequest().permitAll()
                 .anyRequest().permitAll()
             );
 
@@ -41,7 +37,6 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration cfg = new CorsConfiguration();
-        // adicione as origens que você usa no front
         cfg.setAllowedOrigins(List.of(
             "http://127.0.0.1:5500",
             "http://localhost:5500",
