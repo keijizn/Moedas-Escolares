@@ -25,7 +25,6 @@ public class AuthController {
     this.mail = mail;
   }
 
-  // ===== helpers de reflexão para pegar nome/email de forma genérica =====
   private static String readStringByMethods(Object src, String... candidates) {
     if (src == null) return null;
     for (String mName : candidates) {
@@ -35,7 +34,6 @@ public class AuthController {
         if (v instanceof String s && !s.isBlank()) return s;
       } catch (NoSuchMethodException ignored) {
       } catch (Exception e) {
-        // ignore e continua tentando
       }
     }
     return null;
@@ -50,7 +48,6 @@ public class AuthController {
         if (v instanceof String s && !s.isBlank()) return s;
       } catch (NoSuchFieldException ignored) {
       } catch (Exception e) {
-        // ignore e continua tentando
       }
     }
     return null;
@@ -58,7 +55,6 @@ public class AuthController {
 
   private static String readStringSmart(Object src, String base) {
     if (src == null) return null;
-    // tenta getters padrão, acessores de record e campos públicos
     String val =
         readStringByMethods(src, "get" + capitalize(base), base) ;
     if (val == null) val = readStringByFields(src, base);
@@ -73,13 +69,11 @@ public class AuthController {
     for (String v : vals) if (v != null && !v.isBlank()) return v;
     return null;
   }
-  // =======================================================================
 
   @PostMapping("/aluno/register")
   public ResponseEntity<?> cadAluno(@Valid @RequestBody AlunoRegister dto) {
     var result = service.registerAluno(dto);
 
-    // tenta extrair nome/email do resultado e, se não achar, do DTO
     String nome  = coalesce(readStringSmart(result, "nome"),  readStringSmart(dto, "nome"));
     String email = coalesce(readStringSmart(result, "email"), readStringSmart(dto, "email"));
 
